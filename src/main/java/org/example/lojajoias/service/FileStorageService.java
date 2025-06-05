@@ -1,7 +1,5 @@
 package org.example.lojajoias.service;
 
-import jakarta.annotation.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +11,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
 @Service
-public class FileStorageService {
+public class FileStorageService{
 
     private final Path root = Paths.get("src/main/webapp/WEB-INF/images");
 

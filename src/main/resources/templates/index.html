@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<div th:insert="~{commons/fragments :: header}"></div>
+<div th:insert="~{commons/fragments :: menu(${msg})}">
+</div>
+
 <p th:text="${msg}"></p>
 
 <h1>Página de gerenciamento de Joias</h1>
@@ -16,7 +20,7 @@
   <tr>
     <th>Nome</th>
     <th>Valor</th>
-    <th>Tipo</th>
+    <th>Categoria</th>
     <th>Pedras</th>
     <th>Imagem</th>
     <th>Ações</th>
@@ -28,6 +32,7 @@
     <td th:text="${j.valor}"></td>
     <td th:text="${j.categoria}"></td>
     <td th:text="${j.pedras}"></td>
+    <td > <img th:src="'/images/'+${j.imagemUri}" /></td>
     <td>
       <a th:href="@{'/editar/' + ${j.id}}"> EDITAR </a>
       <a th:href="@{'/deletar/' + ${j.id}}"> DELETAR </a>

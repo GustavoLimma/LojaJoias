@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>edite de Joias</title>
+    <title>Edição de Joia</title>
 </head>
 <body>
-<h1>a</h1>
-<form method="post" th:action="@{/doProcessSave}" th:object="${joia}">
-    id: <input type="text" th:field="*{id}" readonly="readonly" /> <br />
+<form method="post" th:action="@{/doProcessSaveWithFile}" th:object="${joia}" enctype="multipart/form-data">
     Nome: <input type="text" th:field="*{nome}"/> <br />
+    <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color: #ff0000" />
     Valor: <input type="text" th:field="*{valor}"/> <br />
     Tipo: <input type="text" th:field="*{categoria}"/> <br />
     Pedras: <input type="text" th:field="*{pedras}"/> <br />
+    Imagem: <input type="file" name="file"/> <br />
     <button type="submit">Enviar</button>
 </form>
 </body>

@@ -40,7 +40,11 @@ public class JoiaController {
         if (errors.hasErrors()) {
             return "cadastro";
         } else {
-
+            j.setImagemUri(file.getOriginalFilename());
+            service.create(j);
+            fileStorageService.save(file);
+            redirectAttributes.addAttribute("msg", "Cadastro realizado com sucesso");
+            return "redirect:/";
         }
     }
 

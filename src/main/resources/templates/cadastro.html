@@ -5,11 +5,13 @@
     <title>Cadastro de Joias</title>
 </head>
 <body>
-<form method="post" th:action="@{/doProcessSave}" th:object="${joia}">
+<form method="post" th:action="@{/doProcessSaveWithFile}" th:object="${joia}" enctype="multipart/form-data">
     Nome: <input type="text" th:field="*{nome}"/> <br />
+    <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color: #ff0000" />
     Valor: <input type="text" th:field="*{valor}"/> <br />
     Tipo: <input type="text" th:field="*{categoria}"/> <br />
     Pedras: <input type="text" th:field="*{pedras}"/> <br />
+    Imagem: <input type="file" name="file"/> <br />
     <button type="submit">Enviar</button>
 </form>
 </body>

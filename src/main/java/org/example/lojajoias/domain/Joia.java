@@ -24,6 +24,5 @@ public class Joia {
     String categoria;
     String pedras;
     String descricao;
-    String imageURI;
-
+    String imagemUri;
 }
