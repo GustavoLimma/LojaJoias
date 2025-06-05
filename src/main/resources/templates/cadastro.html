@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Joias</title>
+</head>
+<body>
+<form method="post" th:action="@{/doProcessSave}" th:object="${joia}">
+    Nome: <input type="text" th:field="*{nome}"/> <br />
+    Valor: <input type="text" th:field="*{valor}"/> <br />
+    Tipo: <input type="text" th:field="*{categoria}"/> <br />
+    Pedras: <input type="text" th:field="*{pedras}"/> <br />
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>

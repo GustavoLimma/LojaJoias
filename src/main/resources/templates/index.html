@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<p th:text="${msg}"></p>
+
+<h1>Página de gerenciamento de Joias</h1>
+<h2>Cadastre uma nova joia <a href="/cadastro">aqui</a>.</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Valor</th>
+    <th>Tipo</th>
+    <th>Pedras</th>
+    <th>Imagem</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="j : ${joiaList}">
+    <td th:text="${j.nome}"></td>
+    <td th:text="${j.valor}"></td>
+    <td th:text="${j.categoria}"></td>
+    <td th:text="${j.pedras}"></td>
+    <td>
+      <a th:href="@{'/editar/' + ${j.id}}"> EDITAR </a>
+      <a th:href="@{'/deletar/' + ${j.id}}"> DELETAR </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
