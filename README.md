@@ -72,7 +72,7 @@ java -jar target/nome-do-projeto.jar
 **Contribuintes:**
 
 * [@GustavoLimma](https://github.com/GustavoLimma) – desenvolvedor 
-* [@amigo-dev](https://coloca o teu link aqui.com/amigo-dev) – desenvolvedor
+* [@CaioCesar](https://github.com/Caio-Cesar-Miranda) – desenvolvedor
 
 
 ## 📜 Licença
