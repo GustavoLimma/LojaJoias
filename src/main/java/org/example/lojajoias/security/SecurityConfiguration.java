@@ -1,3 +1,4 @@
+/*
 package org.example.lojajoias.security;
 
 import org.springframework.context.annotation.Bean;
@@ -34,3 +35,5 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 }
+
+ */

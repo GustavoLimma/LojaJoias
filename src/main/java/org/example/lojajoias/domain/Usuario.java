@@ -1,3 +1,4 @@
+/*
 package org.example.lojajoias.domain;
 
 import jakarta.persistence.Entity;
@@ -74,3 +75,5 @@ public class Usuario  implements UserDetails {
         return true;
     }
 }
+
+ */

@@ -1,14 +1,12 @@
 package org.example.lojajoias;
 
 import jakarta.annotation.Resource;
-import org.example.lojajoias.domain.Usuario;
 import org.example.lojajoias.service.FileStorageService;
-import org.example.lojajoias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.CacheControl;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import java.util.concurrent.TimeUnit;
@@ -20,7 +18,8 @@ public class LojaJoiasApplication {
 
         SpringApplication.run(LojaJoiasApplication.class, args);
     }
-
+}
+/*
     @Resource
     FileStorageService storageService;
 
@@ -50,3 +49,4 @@ public class LojaJoiasApplication {
 }
 
 }
+*/

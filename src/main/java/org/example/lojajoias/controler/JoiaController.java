@@ -44,7 +44,8 @@ public class JoiaController {
             service.create(j);
             fileStorageService.save(file);
             redirectAttributes.addAttribute("msg", "Cadastro realizado com sucesso");
-            return "redirect:/";
+            return "redire" +
+                    "ct:/";
         }
     }
 

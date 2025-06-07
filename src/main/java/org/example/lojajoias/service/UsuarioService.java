@@ -1,3 +1,4 @@
+/*
 package org.example.lojajoias.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,3 +33,4 @@ public class UsuarioService implements UserDetailsService {
         throw new UsernameNotFoundException("User not found");
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package org.example.lojajoias.security;
 
 import org.springframework.stereotype.Controller;
@@ -16,3 +17,4 @@ public class SecurityController {
         return "logout";
     }
 }
+*/

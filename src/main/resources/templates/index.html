@@ -6,8 +6,7 @@
 </head>
 <body>
 
-<div th:insert="~{commons/fragments :: header}"></div>
-<div th:insert="~{commons/fragments :: menu(${msg})}">
+
 </div>
 
 <p th:text="${msg}"></p>
@@ -32,7 +31,10 @@
     <td th:text="${j.valor}"></td>
     <td th:text="${j.categoria}"></td>
     <td th:text="${j.pedras}"></td>
-    <td > <img th:src="'/images/'+${j.imagemUri}" /></td>
+    <td>
+      <img th:src="@{'/uploads/images/' + ${j.imagemUri}}" width="100" />
+    </td>
+
     <td>
       <a th:href="@{'/editar/' + ${j.id}}"> EDITAR </a>
       <a th:href="@{'/deletar/' + ${j.id}}"> DELETAR </a>
