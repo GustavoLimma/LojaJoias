@@ -11,8 +11,7 @@
 
 <p th:text="${msg}"></p>
 
-<h1>Página de gerenciamento de Joias</h1>
-<h2>Cadastre uma nova joia <a href="/cadastro">aqui</a>.</h2>
+<h1>Página de para compra de joias</h1>
 
 <table>
   <thead>
@@ -22,7 +21,6 @@
     <th>Categoria</th>
     <th>Pedras</th>
     <th>Imagem</th>
-    <th>Ações</th>
   </tr>
   </thead>
   <tbody>
@@ -33,11 +31,6 @@
     <td th:text="${j.pedras}"></td>
     <td>
       <img th:src="@{'/images/' + ${j.imagemUri}}" width="100" />
-    </td>
-
-    <td>
-      <a th:href="@{'/editar/' + ${j.id}}"> EDITAR </a>
-      <a th:href="@{'/deletar/' + ${j.id}}"> DELETAR </a>
     </td>
   </tr>
   </tbody>

@@ -31,22 +31,18 @@ public class JoiaController {
         HttpSession session = request.getSession();
         session.setAttribute("msg", "Hello World");
         model.addAttribute("msg", session.getAttribute("msg"));
-        model.addAttribute("joiaList", service.getAll());
+        model.addAttribute("joiaList", service.getAllNoDelete());
         return "index";
     }
 
-    @PostMapping("/doProcessSaveWithFile")
-    public String doProcessSaveWithFile(@ModelAttribute @Valid Joia j, Errors errors, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
-        if (errors.hasErrors()) {
-            return "cadastro";
-        } else {
-            j.setImagemUri(file.getOriginalFilename());
-            service.create(j);
-            fileStorageService.save(file);
-            redirectAttributes.addAttribute("msg", "Cadastro realizado com sucesso");
-            return "redire" +
-                    "ct:/";
-        }
+    @GetMapping("/admin")
+    public String adminPage(Model model, HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        session.setAttribute("msg", "Hello World");
+        model.addAttribute("msg", session.getAttribute("msg"));
+        model.addAttribute("joiaList", service.getAll());
+        return "admin";
     }
 
     @PostMapping("/doProcessSave")
@@ -71,7 +67,13 @@ public class JoiaController {
     @GetMapping("/deletar/{id}")
     public String doProcessDelete(@PathVariable Long id){
         service.softDelete(id);
-        return "redirect:/";
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/restaurar/{id}")
+    public String doProcessRestaur(@PathVariable Long id){
+        service.restore(id);
+        return "redirect:/admin";
     }
 
     @GetMapping("/editar/{id}")

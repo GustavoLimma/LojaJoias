@@ -22,12 +22,16 @@ public class JoiaService {
 
     public void updated(){}
 
-    public List<Joia> getAll(){
+    public List<Joia> getAllNoDelete(){
         return repository.findByIsDeleteIsNull();
     }
 
     public Joia getById(Long id){
         return repository.findById(id).get();
+    }
+
+    public List<Joia> getAll(){
+        return repository.findAll();
     }
 
     public void softDelete(Long id) {
@@ -36,4 +40,12 @@ public class JoiaService {
         joia.setIsDelete(LocalDateTime.now());
         repository.save(joia);
     }
+
+    public void restore(Long id) {
+        Joia joia = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Joia não encontrada"));
+        joia.setIsDelete(null);
+        repository.save(joia);
+    }
+
 }
