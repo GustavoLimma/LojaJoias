@@ -70,7 +70,7 @@ public class JoiaController {
 
     @GetMapping("/deletar/{id}")
     public String doProcessDelete(@PathVariable Long id){
-        service.delete(id);
+        service.softDelete(id);
         return "redirect:/";
     }
 

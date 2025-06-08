@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jdk.jfr.Enabled;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -25,4 +27,5 @@ public class Joia {
     String pedras;
     String descricao;
     String imagemUri;
+    LocalDateTime isDelete;
 }

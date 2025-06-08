@@ -18,7 +18,7 @@ import org.springframework.core.io.UrlResource;
 @Service
 public class FileStorageService{
 
-    private final Path root = Paths.get("src/main/resources/static/uploads/images");
+    private final Path root = Paths.get("src/main/webapp/WEB-INF/images");
 
     public void init() {
         try {
