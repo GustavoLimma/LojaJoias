@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:insert="~{commons/fragments :: header}"></div>
+<div th:insert="~{commons/fragments :: menu(${msg})}">
+</div>
+
+<p th:text="${msg}"></p>
+
+<h1>carrinho</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Valor</th>
+        <th>Categoria</th>
+        <th>Pedras</th>
+        <th>Imagem</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="j : ${carrinho}">
+        <td th:text="${j.nome}"></td>
+        <td th:text="${j.valor}"></td>
+        <td th:text="${j.categoria}"></td>
+        <td th:text="${j.pedras}"></td>
+        <td><img th:src="@{'/images/' + ${j.imagemUri}}" width="100" /></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{'/finalizarCompra'}">Finalizar Compra</a>
+<a th:href="@{'/'}">Continuar Comprando</a>
+</body>
+</html>

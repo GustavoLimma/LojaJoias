@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class JoiaController {
 
@@ -32,6 +35,11 @@ public class JoiaController {
         session.setAttribute("msg", "Hello World");
         model.addAttribute("msg", session.getAttribute("msg"));
         model.addAttribute("joiaList", service.getAllNoDelete());
+
+        List<Joia> carrinho = (List<Joia>) session.getAttribute("carrinho");
+        int quantidadeCarrinho = (carrinho != null) ? carrinho.size() : 0;
+        model.addAttribute("quantidadeCarrinho", quantidadeCarrinho);
+
         return "index";
     }
 
@@ -51,7 +59,7 @@ public class JoiaController {
             return "cadastro";
         } else {
             service.create(joia);
-            return "redirect:/";
+            return "redirect:/admin";
         }
     }
 
@@ -81,4 +89,41 @@ public class JoiaController {
         model.addAttribute("joia", service.getById(id));
         return "edite";
     }
+
+    @GetMapping("/verCarrinho")
+    public String verCarrinho(HttpSession session,Model model, RedirectAttributes redirectAttributes){
+        List<Joia> carrinho = (List<Joia>) session.getAttribute("carrinho");
+
+        if (carrinho == null || carrinho.isEmpty()) {
+            redirectAttributes.addFlashAttribute("mensagem", "Carrinho está vazio.");
+            return "redirect:/";
+        }
+
+        model.addAttribute("carrinho", carrinho);
+        return "Carrinho";
+    }
+
+    @GetMapping("/adicionarCarrinho")
+    public String adicionarCarrinho(@RequestParam Long id, HttpSession session) {
+        Joia joia = service.getById(id);
+
+        List<Joia> carrinho = (List<Joia>) session.getAttribute("carrinho");
+        if (carrinho == null) {
+            carrinho = new ArrayList<>();
+            session.setAttribute("carrinho", carrinho);
+        }
+
+        carrinho.add(joia);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/finalizarCompra")
+    public String finalizarCompra(HttpSession session) {
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
 }

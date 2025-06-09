@@ -32,8 +32,17 @@
     <td>
       <img th:src="@{'/images/' + ${j.imagemUri}}" width="100" />
     </td>
+    <td>
+    <a th:href="@{/adicionarCarrinho(id=${j.id})}">Adicionar ao carrinho</a>
+    </td>
   </tr>
   </tbody>
 </table>
+  <a th:href="@{'/verCarrinho'}"> Ver Carrinho </a>
+
+  <br>
+
+  <h3>Quantidade de itens no carrinho: </h3>
+  <span th:text="${quantidadeCarrinho}">0</span>
 </body>
 </html>
