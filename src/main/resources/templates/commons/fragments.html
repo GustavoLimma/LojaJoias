@@ -1,38 +1,63 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title th:fragment="title">Loja de Joias</title>
+</head>
 <body>
 
-<header th:fragment="header">
-  <h1> Site Importante</h1>
+<header th:fragment="header" class="bg-primary text-white py-3">
+
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1 class="mb-0">💎 Loja de Joias</h1>
+      </div>
+      <sec:authorize access="isAuthenticated()">
+        <form th:action="@{/logout}" method="post" class="d-inline">
+          <button type="submit" class="btn btn-danger position-absolute"
+                  style="top: 20px; right: 20px;">
+            Sair
+          </button>
+        </form>
+      </sec:authorize>
+
+      <div class="col-md-6 text-end">
+        <a href="/" class="btn btn-light me-2">Início</a>
+        <sec:authorize access="hasRole('ADMIN')">
+          <a href="/admin" class="btn btn-outline-light me-2">Admin</a>
+          <a href="/cadastro" class="btn btn-success me-2">Cadastro</a>
+        </sec:authorize>
+        <sec:authorize access="!hasRole('ADMIN')">
+          <a href="/verCarrinho" class="btn btn-warning">
+            🛒 Carrinho <span th:if="${quantidadeCarrinho != null}" class="badge bg-danger" th:text="${quantidadeCarrinho}">0</span>
+          </a>
+        </sec:authorize>
+      </div>
+
+    </div>
+  </div>
 </header>
 
-<footer th:fragment="footer">
-  <h6> Rodapé do site</h6>
+<footer th:fragment="footer" class="bg-dark text-white py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-0">&copy; 2025 Loja de Joias. Todos os direitos reservados.</p>
+  </div>
 </footer>
 
-<div th:fragment="menu(username)">
-  <p th:text="${username}"></p>
+<div th:fragment="mensagem" th:if="${mensagem}" class="alert alert-success alert-dismissible fade show" role="alert">
+  <span th:text="${mensagem}"></span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
-<div th:fragment="statusCadastro(status)">
-  <p th:switch="${status}">
-    <span th:case="'CADASTRADO'">CADASTRADO</span>
-    <span th:case="1">ALTERADO</span>
-    <span th:case="'EXCLUIDO'">EXCLUIDO</span>
-    <span th:case="*">CANCELADO</span>
-  </p>
-</div>
-
-<div th:fragment="statusUsuario(status)">
-  <p>
-    <span th:if="${status == 'NOVO'}">Bem vindo</span>
-    <span th:unless="${status == 'NOVO'}">Voltou!</span>
-  </p>
-</div>
-
-<div th:fragment="displayNome(nome)">
-  <p th:text="${nome} ?: 'ANÔNIMO'"></p>
+<div th:fragment="scripts">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </div>
 
 </body>

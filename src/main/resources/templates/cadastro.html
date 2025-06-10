@@ -1,50 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Joia</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Loja de Joias - Cadastrar Joia</title>
 </head>
 <body>
-<div class="container mt-5">
-    <h2>Cadastrar Joia</h2>
-    <form method="post" th:action="@{/doProcessSave}" th:object="${joia}" class="mt-4">
 
-        <div class="form-group">
-            <label>ID</label>
-            <input type="text" th:field="*{id}" class="form-control" readonly />
+<header th:replace="~{commons/fragments :: header}"></header>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">💎 Cadastrar Nova Joia</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" th:action="@{/doProcessSave}" th:object="${joia}">
+
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nome" class="form-label">Nome da Joia *</label>
+                                <input type="text" th:field="*{nome}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid' : ''"
+                                       id="nome" placeholder="Ex: Anel de Ouro">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="pedras" class="form-label">Pedras *</label>
+                                <input type="text" th:field="*{pedras}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('pedras')} ? 'is-invalid' : ''"
+                                       id="pedras" placeholder="Ex: Diamante, Esmeralda">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('pedras')}" th:errors="*{pedras}"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="valor" class="form-label">Valor (R$) *</label>
+                                <input type="number" th:field="*{valor}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('valor')} ? 'is-invalid' : ''"
+                                       id="valor" step="0.01" min="0" placeholder="0.00">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="quantidade" class="form-label">Quantidade *</label>
+                                <input type="number" th:field="*{quantidade}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('quantidade')} ? 'is-invalid' : ''"
+                                       id="quantidade" min="1" placeholder="1">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"></div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mb-3">
+                            <small><strong>Nota:</strong> A imagem será selecionada automaticamente do nosso catálogo.</small>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                💾 Salvar Joia
+                            </button>
+                            <a href="/admin" class="btn btn-secondary">
+                                ❌ Cancelar
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Nome</label>
-            <input type="text" th:field="*{nome}" class="form-control" />
-            <small class="form-text text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></small>
-        </div>
-
-        <div class="form-group">
-            <label>Valor</label>
-            <input type="text" th:field="*{valor}" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label>Categoria</label>
-            <input type="text" th:field="*{categoria}" class="form-control" />
-        </div>
-
-
-        <div class="form-group">
-            <label>Pedras</label>
-            <input type="text" th:field="*{pedras}" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label>Quantidade</label>
-            <input type="number" th:field="*{quantidade}" class="form-control" min="0" />
-        </div>
-
-
-        <button type="submit" class="btn btn-success mt-3">Salvar</button>
-    </form>
+    </div>
 </div>
+
+<footer th:replace="~{commons/fragments :: footer}"></footer>
+<div th:replace="~{commons/fragments :: scripts}"></div>
+
 </body>
 </html>

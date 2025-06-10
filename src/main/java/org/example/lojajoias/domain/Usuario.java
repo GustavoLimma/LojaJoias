@@ -1,13 +1,7 @@
-/*
 package org.example.lojajoias.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +10,21 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Usuario  implements UserDetails {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String username;
-    String password;
+    @Column(unique = true)
+    private String username;
 
-    Boolean isAdmin;
+    private String password;
+
+    private Boolean isAdmin;
+
+    public Usuario() {
+    }
 
     public Usuario(String username, String password, Boolean isAdmin) {
         this.username = username;
@@ -36,44 +32,42 @@ public class Usuario  implements UserDetails {
         this.isAdmin = isAdmin;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.isAdmin){
-            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }else{
-            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-        }
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getUsername() {
         return username;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (Boolean.TRUE.equals(this.isAdmin)) {
+            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else {
+            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    @Override public boolean isAccountNonExpired() { return true; }
+    @Override public boolean isAccountNonLocked() { return true; }
+    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override public boolean isEnabled() { return true; }
+    @Override public String getPassword() { return password; }
 }
-
- */

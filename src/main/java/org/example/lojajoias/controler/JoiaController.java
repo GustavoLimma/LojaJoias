@@ -1,8 +1,6 @@
 package org.example.lojajoias.controler;
 
 import jakarta.validation.Valid;
-import org.example.lojajoias.service.FileStorageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -11,7 +9,6 @@ import org.example.lojajoias.service.JoiaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -21,19 +18,15 @@ import java.util.List;
 public class JoiaController {
 
     JoiaService service;
-    FileStorageService fileStorageService;
 
-    public JoiaController(JoiaService service, FileStorageService fileStorageService) {
+    public JoiaController(JoiaService service) {
         this.service = service;
-        this.fileStorageService = fileStorageService;
     }
 
     @GetMapping("/")
     public String getHomePage(Model model, HttpServletRequest request){
 
         HttpSession session = request.getSession();
-        session.setAttribute("msg", "Hello World");
-        model.addAttribute("msg", session.getAttribute("msg"));
         model.addAttribute("joiaList", service.getAllNoDelete());
 
         List<Joia> carrinho = (List<Joia>) session.getAttribute("carrinho");
@@ -54,33 +47,40 @@ public class JoiaController {
     }
 
     @PostMapping("/doProcessSave")
-    public String doProcessSave(@ModelAttribute @Valid Joia joia, Errors errors){
+    public String doProcessSave(@ModelAttribute @Valid Joia joia, Errors errors, RedirectAttributes redirectAttributes, Model model) {
         if (errors.hasErrors()) {
-            return "cadastro";
+            model.addAttribute("joia", joia);
+            return (joia.getId() != null) ? "edite" : "cadastro";
         } else {
-            service.create(joia);
+            if (joia.getId() == null) {
+                service.updated(joia);
+                redirectAttributes.addFlashAttribute("mensasgem", "Joia editada com sucesso!");
+            } else {
+                service.create(joia);
+                redirectAttributes.addFlashAttribute("mensasgem", "Joia cadastrada com sucesso!");
+            }
             return "redirect:/admin";
         }
     }
 
     @GetMapping("cadastro")
     public String getCadastroPage(Model model){
-
         Joia joia = new Joia();
         model.addAttribute("joia", joia);
-
         return "cadastro";
     }
 
     @GetMapping("/deletar/{id}")
-    public String doProcessDelete(@PathVariable Long id){
+    public String doProcessDelete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         service.softDelete(id);
+        redirectAttributes.addFlashAttribute("mensasgem", "Joia deletada com sucesso!");
         return "redirect:/admin";
     }
 
     @GetMapping("/restaurar/{id}")
-    public String doProcessRestaur(@PathVariable Long id){
+    public String doProcessRestaur(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         service.restore(id);
+        redirectAttributes.addFlashAttribute("mensasgem", "Joia restaurada com sucesso!");
         return "redirect:/admin";
     }
 
@@ -119,10 +119,10 @@ public class JoiaController {
     }
 
     @GetMapping("/finalizarCompra")
-    public String finalizarCompra(HttpSession session) {
+    public String finalizarCompra(HttpSession session, RedirectAttributes redirectAttributes) {
 
         session.invalidate();
-
+        redirectAttributes.addFlashAttribute("mensagem", "Compra finalizada com sucesso!");
         return "redirect:/";
     }
 
