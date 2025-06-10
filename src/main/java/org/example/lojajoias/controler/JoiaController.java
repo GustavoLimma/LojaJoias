@@ -53,10 +53,10 @@ public class JoiaController {
             return (joia.getId() != null) ? "edite" : "cadastro";
         } else {
             if (joia.getId() == null) {
-                service.updated(joia);
+                service.create(joia);
                 redirectAttributes.addFlashAttribute("mensasgem", "Joia editada com sucesso!");
             } else {
-                service.create(joia);
+                service.updated(joia);
                 redirectAttributes.addFlashAttribute("mensasgem", "Joia cadastrada com sucesso!");
             }
             return "redirect:/admin";

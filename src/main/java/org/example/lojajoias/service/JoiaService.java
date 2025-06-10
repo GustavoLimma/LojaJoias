@@ -2,7 +2,6 @@ package org.example.lojajoias.service;
 
 import org.example.lojajoias.domain.Joia;
 import org.example.lojajoias.repository.JoiaRepository;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -55,9 +54,9 @@ public class JoiaService {
 
     private String getRandomImageUrl() {
         String[] images = {
-                "/images/joia1.webp",
-                "/images/Joia2.webp",
-                "/images/Joia3.jpg",
+                "/imagens/joia1.webp",
+                "/imagens/Joia2.webp",
+                "/imagens/Joia3.jpg",
         };
         Random random = new Random();
         return images[random.nextInt(images.length)];
