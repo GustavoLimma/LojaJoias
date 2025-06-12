@@ -19,7 +19,6 @@ A loja foi construída com foco em:
 
 - **Frontend:**
   - HTML5, CSS3 (com **Bootstrap** para responsividade e design elegante)
-  - JavaScript
 
 - **Backend:**
   - **Java** com o framework **Spring Boot**
@@ -35,12 +34,10 @@ A loja foi construída com foco em:
 ## 🎨 Funcionalidades Implementadas
 
 - Catálogo de joias organizado por categorias
-- Filtros de busca (preço, tipo, material, etc.)
 - Carrinho de compras e checkout funcional
 - Área de login e cadastro de usuários
 - Painel administrativo para gerenciamento de produtos e pedidos
 - Layout totalmente responsivo para dispositivos móveis
-- Integração com redes sociais
 
 ---
 
