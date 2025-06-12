@@ -1,12 +1,14 @@
 # 💎 Projeto Loja Online de Joias
 
-Este é um projeto em desenvolvimento de uma loja online de joias, projetada para oferecer uma experiência de compra elegante e intuitiva.
+Este é um projeto **finalizado** de uma loja online de joias, projetada para oferecer uma experiência de compra elegante e intuitiva.
+
+🔗 Acesse o projeto em produção: [lojajoias.onrender.com](https://lojajoias.onrender.com)
 
 ---
 
 ## ✨ Visão Geral
 
-A loja será construída com foco em:
+A loja foi construída com foco em:
 - **Design sofisticado e responsivo**, destacando a beleza das joias.
 - **Facilidade de navegação** e processo de compra simplificado.
 - **Segurança** nas transações e proteção dos dados dos usuários.
@@ -23,29 +25,31 @@ A loja será construída com foco em:
   - **Java** com o framework **Spring Boot**
 
 - **Banco de Dados:**
-  - MySQL
-    
+  - PostgreSQL
+
+- **Infraestrutura:**
+  - **Docker** (containerização do backend e banco de dados)
+
 ---
 
-## 🎨 Funcionalidades Planejadas
+## 🎨 Funcionalidades Implementadas
 
 - Catálogo de joias organizado por categorias
-- Filtros de busca avançados (preço, tipo, material, etc.)
-- Carrinho de compras e checkout seguro
-- Área de login e cadastro para usuários
+- Filtros de busca (preço, tipo, material, etc.)
+- Carrinho de compras e checkout funcional
+- Área de login e cadastro de usuários
 - Painel administrativo para gerenciamento de produtos e pedidos
-- Responsividade para dispositivos móveis
+- Layout totalmente responsivo para dispositivos móveis
 - Integração com redes sociais
 
 ---
 
-## 🔧 Como Executar o Projeto
+## 🔧 Como Executar o Projeto Localmente
 
 **Requisitos:**
 - **Java 17+**
-- **Maven** (ou Gradle) para gerenciamento de dependências do Spring Boot
-- Banco de dados MySQL ou PostgreSQL
-- Node.js e npm (opcional, se houver build de assets JS/CSS)
+- **Maven**
+- **Docker e Docker Compose**
 
 **Passos:**
 
@@ -56,24 +60,26 @@ git clone https://github.com/seu-usuario/nome-do-repositorio.git
 # Acesse a pasta do projeto
 cd nome-do-repositorio
 
-# Compile e execute o projeto com Maven
-./mvnw spring-boot:run
-
-# Ou build o projeto para gerar o .jar
-./mvnw clean package
-java -jar target/nome-do-projeto.jar
-
+# Suba os containers com Docker Compose
+docker-compose up --build
 ````
 
-## 🚧 Status do Projeto e Contribuintes
+O backend será exposto na porta padrão configurada no `application.properties`. O banco de dados PostgreSQL também será inicializado automaticamente com o Docker.
 
-> **Em desenvolvimento** – ainda estamos trabalhando na estrutura inicial e integração de funcionalidades principais.
+---
 
-**Contribuintes:**
+## ✅ Status do Projeto
 
-* [@GustavoLimma](https://github.com/GustavoLimma) – desenvolvedor 
-* [@CaioCesar](https://github.com/Caio-Cesar-Miranda) – desenvolvedor
+> **Concluído** – o sistema está funcional, com todas as principais funcionalidades implementadas e disponível em produção.
 
+---
+
+## 👥 Contribuintes
+
+* [@GustavoLimma](https://github.com/GustavoLimma) – Desenvolvedor
+* [@CaioCesar](https://github.com/Caio-Cesar-Miranda) – Desenvolvedor
+
+---
 
 ## 📜 Licença
 
